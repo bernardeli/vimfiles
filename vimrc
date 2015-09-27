@@ -28,8 +28,7 @@ Plugin 'vim-scripts/matchit.zip'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jeetsukumaran/vim-buffergator'
-" Plugin 'szw/vim-tags'
-" Plugin 'terryma/vim-smooth-scroll'
+Plugin 'Soares/butane.vim'
 
 " Git integration
 Plugin 'tpope/vim-fugitive'
@@ -41,6 +40,19 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'chriskempson/vim-tomorrow-theme'
 
 filetype plugin indent on
+
+" Close the buffer.
+noremap <leader>bd :Bclose<CR>
+" List buffers.
+noremap <leader>bl :ls<CR>
+" Next buffer.
+noremap <leader>bn :bn<CR>
+" Previous buffer.
+noremap <leader>bp :bp<CR>
+" Toggle to most recently used buffer.
+noremap <leader>bt :b#<CR>
+" Close the buffer & discard changes.
+noremap <leader>bx :Bclose!<CR>
 
 " NERDTree
 nmap tt :NERDTreeToggle<CR>
@@ -177,22 +189,25 @@ set columns=237
 set cursorline
 set cursorcolumn
 
+set guifont=Monaco\ for\ Powerline:h15
+let g:airline#extensions#tabline#enabled = 1
+
 if has("gui_running")
   set t_Co=256
   hi CursorLine guibg=#222222
   hi CursorColumn guibg=#222222
   let base16colorspace=256 " Access colors present in 256 colorspace
   colorscheme base16-ocean
-  set guifont=Monaco\ for\ Powerline:h15
+
+  " Tab drop is not available on brew-vim
+  cab TAbnew tab drop
+  cab Tabnew tab drop
+  cab tabnew tab drop
 endif
 
 if !has("gui_running") && $TERM == "xterm-256color"
   colorscheme Tomorrow-Night
-  set guifontset=Monaco\ for\ Powerline:h15
-  " turn on airline tabs only when gui is not present
 endif
-
-let g:airline#extensions#tabline#enabled = 1
 
 " Removes trailing spaces
 function TrimWhiteSpace()
@@ -281,18 +296,6 @@ function! s:Preserve(command)
   call histdel("search", -1)
   let @/ = histget("search", -1)
 endfunction
-
-function! s:AddFocusTag()
-  call s:Preserve("normal! ^ / do\<cr>C, focus: true do\<esc>")
-endfunction
-:nnoremap <leader>a :AddFocusTag<CR>
-command! -nargs=0 AddFocusTag call s:AddFocusTag()
-
-function! s:RemoveAllFocusTags()
-  call s:Preserve("%s/, focus: true//e")
-endfunction
-:nnoremap <leader>d :RemoveAllFocusTags<CR>
-command! -nargs=0 RemoveAllFocusTags call s:RemoveAllFocusTags()
 
 function! OpenGemfile()
   if filereadable("Gemfile")
@@ -410,9 +413,6 @@ cab Wa wa
 cab wQ wq
 cab Wq wq
 cab WQ wq
-cab TAbnew tab drop
-cab Tabnew tab drop
-cab tabnew tab drop
 cab E e
 cab ag Ag
 ab bp require 'pry'; binding.pry
@@ -436,6 +436,8 @@ set visualbell
 
 " Jump between ctags and don't lose buffer history
 set hidden
+
+set tags=./.git/ctags,./tags,tags;$HOME
 
 " Bind K to search for the word under cursor
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
