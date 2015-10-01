@@ -35,10 +35,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'int3/vim-extradite'
 
-" Themes
-Plugin 'chriskempson/base16-vim'
-Plugin 'chriskempson/vim-tomorrow-theme'
-
 filetype plugin indent on
 
 " Close the buffer.
@@ -193,6 +189,7 @@ set guifont=Monaco\ for\ Powerline:h15
 let g:airline#extensions#tabline#enabled = 1
 
 if has("gui_running")
+  Plugin 'chriskempson/base16-vim'
   set t_Co=256
   hi CursorLine guibg=#222222
   hi CursorColumn guibg=#222222
@@ -206,6 +203,7 @@ if has("gui_running")
 endif
 
 if !has("gui_running") && $TERM == "xterm-256color"
+  Plugin 'chriskempson/vim-tomorrow-theme'
   colorscheme Tomorrow-Night
 endif
 
