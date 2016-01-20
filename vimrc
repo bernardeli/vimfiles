@@ -28,7 +28,6 @@ Plugin 'vim-scripts/matchit.zip'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'Soares/butane.vim'
 
 " Git integration
 Plugin 'tpope/vim-fugitive'
@@ -36,19 +35,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'int3/vim-extradite'
 
 filetype plugin indent on
-
-" Close the buffer.
-noremap <leader>bd :Bclose<CR>
-" List buffers.
-noremap <leader>bl :ls<CR>
-" Next buffer.
-noremap <leader>bn :bn<CR>
-" Previous buffer.
-noremap <leader>bp :bp<CR>
-" Toggle to most recently used buffer.
-noremap <leader>bt :b#<CR>
-" Close the buffer & discard changes.
-noremap <leader>bx :Bclose!<CR>
 
 " NERDTree
 nmap tt :NERDTreeToggle<CR>
@@ -186,7 +172,6 @@ set cursorline
 set cursorcolumn
 
 set guifont=Monaco\ for\ Powerline:h15
-let g:airline#extensions#tabline#enabled = 1
 
 if has("gui_running")
   Plugin 'chriskempson/base16-vim'
@@ -204,7 +189,8 @@ endif
 
 if !has("gui_running") && $TERM == "xterm-256color"
   Plugin 'chriskempson/vim-tomorrow-theme'
-  colorscheme Tomorrow-Night
+  colorscheme Tomorrow-Night-Bright
+  set backspace=2
 endif
 
 " Removes trailing spaces
@@ -297,31 +283,31 @@ endfunction
 
 function! OpenGemfile()
   if filereadable("Gemfile")
-    execute ":tab drop Gemfile"
+    execute ":tabnew Gemfile"
   end
 endfunction
 map <Leader>g :call OpenGemfile()<CR>
 
 function! OpenRoutes()
   if filereadable("config/routes.rb")
-    execute ":tab drop config/routes.rb"
+    execute ":tabnew config/routes.rb"
   end
 endfunction
 map <Leader>r :call OpenRoutes()<CR>
 
 function! OpenSpecHelper()
   if filereadable("spec/spec_helper.rb")
-    execute ":tab drop spec/spec_helper.rb"
+    execute ":tabnew spec/spec_helper.rb"
   end
 endfunction
 map <Leader>s :call OpenSpecHelper()<CR>
 
 function! OpenFactoryFile()
   if filereadable("spec/support/factories.rb")
-    execute ":tab drop spec/support/factories.rb"
+    execute ":tabnew spec/support/factories.rb"
   else
     if filereadable("spec/factories.rb")
-      execute ":tab drop spec/factories.rb"
+      execute ":tabnew spec/factories.rb"
     end
   end
 endfunction
