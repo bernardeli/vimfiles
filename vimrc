@@ -193,6 +193,9 @@ if !has("gui_running") && $TERM == "xterm-256color"
   set backspace=2
 endif
 
+" Allow mouse scroll with vim in terminal
+set mouse=a
+
 " Removes trailing spaces
 function TrimWhiteSpace()
   %s/\s*$//
