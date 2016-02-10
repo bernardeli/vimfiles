@@ -28,6 +28,7 @@ Plugin 'vim-scripts/matchit.zip'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'elixir-lang/vim-elixir'
 
 " Git integration
 Plugin 'tpope/vim-fugitive'
