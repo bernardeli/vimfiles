@@ -160,9 +160,6 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_aggregate_errors = 1
 
-" Don't show the top bar
-set guioptions-=T
-
 syntax on
 set background=dark " light
 set lines=57
@@ -172,27 +169,9 @@ set columns=237
 set cursorline
 set cursorcolumn
 
-set guifont=Monaco\ for\ Powerline:h15
-
-if has("gui_running")
-  Plugin 'chriskempson/base16-vim'
-  set t_Co=256
-  hi CursorLine guibg=#222222
-  hi CursorColumn guibg=#222222
-  let base16colorspace=256 " Access colors present in 256 colorspace
-  colorscheme base16-ocean
-
-  " Tab drop is not available on brew-vim
-  cab TAbnew tab drop
-  cab Tabnew tab drop
-  cab tabnew tab drop
-endif
-
-if !has("gui_running") && $TERM == "xterm-256color"
-  Plugin 'chriskempson/vim-tomorrow-theme'
-  colorscheme Tomorrow-Night-Bright
-  set backspace=2
-endif
+Plugin 'chriskempson/vim-tomorrow-theme'
+colorscheme Tomorrow-Night-Bright
+set backspace=2
 
 " Allow mouse scroll with vim in terminal
 set mouse=a
@@ -269,22 +248,6 @@ function TabToggle()
 endfunction
 nmap <F9> mz:execute TabToggle()<CR>
 
-" RSpec focus
-function! s:Preserve(command)
-  " Save cursor position
-  let l = line(".")
-  let c = col(".")
-
-  " Do the business
-  execute a:command
-
-  " Restore cursor position
-  call cursor(l, c)
-  " Remove search history pollution and restore last search
-  call histdel("search", -1)
-  let @/ = histget("search", -1)
-endfunction
-
 function! OpenGemfile()
   if filereadable("Gemfile")
     execute ":tabnew Gemfile"
@@ -358,10 +321,6 @@ vnoremap <D-k> :m '<-2<CR>gv=gv
 " A trick for when you forgot to sudo before editing a file that requires root privileges (typically /etc/hosts).
 " This lets you use w!! to do that after you opened the file already:
 cmap w!! w !sudo tee % >/dev/null
-
-" Ctrl+S to save the current file
-nmap <c-s> :w<CR>
-imap <c-s> <Esc>:w<CR>
 
 " Management tabs
 nnoremap <A-w> :q<cr>
@@ -439,3 +398,6 @@ nnoremap <D-right> :vertical resize +5<cr>
 " set line on 80 column
 let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(400,999),",")
+
+" Dont create new buffers
+set switchbuf=useopen
