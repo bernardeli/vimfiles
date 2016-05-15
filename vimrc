@@ -6,7 +6,7 @@ call vundle#rc()
 
 Plugin 'gmarik/vundle'
 
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'bling/vim-airline'
 Plugin 'danro/rename.vim'
 Plugin 'godlygeek/tabular'
@@ -29,6 +29,7 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'mtscout6/vim-cjsx'
 
 " Git integration
 Plugin 'tpope/vim-fugitive'
@@ -269,17 +270,6 @@ function! OpenSpecHelper()
 endfunction
 map <Leader>s :call OpenSpecHelper()<CR>
 
-function! OpenFactoryFile()
-  if filereadable("spec/support/factories.rb")
-    execute ":tabnew spec/support/factories.rb"
-  else
-    if filereadable("spec/factories.rb")
-      execute ":tabnew spec/factories.rb"
-    end
-  end
-endfunction
-map <Leader>f :call OpenFactoryFile()<CR>
-
 " Search and replace selected text (http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text)
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
@@ -401,3 +391,19 @@ let &colorcolumn="80,".join(range(400,999),",")
 
 " Dont create new buffers
 set switchbuf=useopen
+
+" ### vim-easymotion configuration
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
