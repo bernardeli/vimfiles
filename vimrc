@@ -29,7 +29,11 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'elixir-lang/vim-elixir'
-Plugin 'mtscout6/vim-cjsx'
+Plugin 'hashivim/vim-terraform'
+Plugin 'pearofducks/ansible-vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 
 " Git integration
 Plugin 'tpope/vim-fugitive'
@@ -148,7 +152,6 @@ set nobackup
 set noswapfile
 
 " Syntastic configs
-let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': ['ruby', 'javascript'],
@@ -160,6 +163,8 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_aggregate_errors = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = '/Users/ric/.nvm/versions/node/v6.2.2/bin/eslint'
 
 syntax on
 set background=dark " light
@@ -171,7 +176,9 @@ set cursorline
 set cursorcolumn
 
 Plugin 'chriskempson/vim-tomorrow-theme'
+" colorscheme Tomorrow-Night-Eighties
 colorscheme Tomorrow-Night-Bright
+
 set backspace=2
 
 " Allow mouse scroll with vim in terminal
@@ -352,6 +359,8 @@ cab Wq wq
 cab WQ wq
 cab E e
 cab ag Ag
+cab TAbnew tabnew
+cab Tabnew tabnew
 ab bp require 'pry'; binding.pry
 
 " Syntax Highlighting
