@@ -1,3 +1,8 @@
+# DEPRECATED 
+
+Moved my vimfiles to my [dotfiles repo](https://github.com/bernardeli/dotfiles) so I can properly manage it all with [fresh](https://github.com/freshshell/fresh)
+
+
 # Vimfiles
 
 ## How to use these vim configs
